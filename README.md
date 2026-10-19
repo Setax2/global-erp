@@ -11,7 +11,7 @@ ERP desde cero, pensado para que la IA sea la forma principal de usarlo, y flexi
 ## Pila
 
 - Base de datos: PostgreSQL en Supabase (región Frankfurt, `eu-central-1`)
-- Aplicación web: Next.js + TypeScript (pendiente)
+- Aplicación web: Next.js 16 + TypeScript + Tailwind, sesión con `@supabase/ssr`
 - Capa de IA: Claude vía API con herramientas concretas (pendiente)
 
 ## Estado
@@ -23,13 +23,36 @@ ERP desde cero, pensado para que la IA sea la forma principal de usarlo, y flexi
 - [x] Datos bancarios separados, con permiso propio
 - [x] Campos personalizados por empresa
 - [x] Seguridad por filas en todas las tablas
-- [ ] Aplicación web: inicio de sesión, selector de empresa, contactos
+- [x] Aplicación web: registro e inicio de sesión, crear empresa, selector de empresa
+- [x] Contactos: listado con filtro por papel (clientes, proveedores, ambos…), búsqueda, alta y edición
+- [ ] Gestión de empleados con acceso, roles y permisos desde la aplicación
+- [ ] Datos bancarios y campos personalizados en la ficha de contacto
 - [ ] Catálogo de productos y servicios
 - [ ] Presupuestos
 
 ### Más adelante
 - Recursos humanos: fichajes (registro de jornada), vacaciones, bajas, nóminas
 - Facturación (con cumplimiento Verifactu)
+
+## Desarrollo
+
+```bash
+npm install
+npm run dev   # http://localhost:3000
+```
+
+## Publicación
+
+En Vercel: importar este repositorio y desplegar, sin configuración extra. Después, en Supabase →
+Authentication → URL Configuration, poner la dirección de Vercel como *Site URL* y añadir
+`https://<tu-dominio>/auth/confirmar` a *Redirect URLs*, para que funcionen los correos de confirmación.
+
+## Estructura
+
+- `src/proxy.ts` — refresca la sesión y manda a `/entrar` a quien no la tiene
+- `src/lib/contexto.ts` — usuario, empresas, empresa activa y permisos de la petición
+- `src/app/(acceso)` — entrar y registrarse
+- `src/app/(app)` — la aplicación: selector de empresa, empresas, contactos
 
 ## Base de datos
 

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --fondo: #f6f6f4;
+  --superficie: #ffffff;
+  --texto: #1c1c1a;
+  --tenue: #6b6b66;
+  --borde: #e4e4df;
+  --acento: #1f5f4a;
+  --acento-texto: #ffffff;
+  --acento-suave: #e6f0ec;
+  --peligro: #b42318;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #141413;
+    --superficie: #1d1d1b;
+    --texto: #ececea;
+    --tenue: #9a9a94;
+    --borde: #2f2f2c;
+    --acento: #5fb593;
+    --acento-texto: #0f1f19;
+    --acento-suave: #1c2e27;
+    --peligro: #f97066;
+  }
+}
+
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-texto: var(--texto);
+  --color-tenue: var(--tenue);
+  --color-borde: var(--borde);
+  --color-acento: var(--acento);
+  --color-acento-texto: var(--acento-texto);
+  --color-acento-suave: var(--acento-suave);
+  --color-peligro: var(--peligro);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+@layer components {
+  .campo {
+    @apply w-full rounded-md border border-borde bg-superficie px-3 py-2 text-sm outline-none transition focus:border-acento focus:ring-2 focus:ring-acento/20;
+  }
+  .etiqueta {
+    @apply mb-1 block text-sm font-medium;
+  }
+  .boton {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-acento px-4 py-2 text-sm font-medium text-acento-texto transition hover:opacity-90 disabled:opacity-50;
+  }
+  .boton-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-borde bg-superficie px-4 py-2 text-sm font-medium transition hover:bg-fondo;
+  }
+  .tarjeta {
+    @apply rounded-lg border border-borde bg-superficie;
+  }
+}
